@@ -30,37 +30,39 @@
                 </thead>
                 <tbody>
                     @for (file of inputFiles; track $index) {
-                        <tr>
-                            <td scope="row"><input class="form-check-input" type="checkbox" [(ngModel)]="selectedCheck[$index]"></td>
-                            <td scope="row">
-                                @if (file.type === fileType) {
-                                    <i class="bi bi-file-earmark"></i>
-                                }
-                                @else {
-                                    <i class="bi bi-folder"></i>
-                                }
-                                @if (file.name.length > 10) {
-                                    <a title="{{file.name}}">{{file.name.slice(0,10)}}...</a>
-                                }
-                                @else {
-                                    <a>{{file.name}}</a>
-                                }
-                            </td>
-                            <td scope="row">{{file.creation.toLocaleString()}}</td>
-                            <td scope="row">
-                                @if (file.owners.length > 3) {
-                                    @for (owner of file.owners.slice(0,3); track $index) {
-                                        <img src="{{owner.avatarUrl}}" alt="{{owner.name}}" class="rounded-circle" style="width:50px;height:50px;" title="{{owner.name}}">
+                        @if (file.parentId === undefined) {
+                            <tr>
+                                <td scope="row"><input class="form-check-input" type="checkbox" [(ngModel)]="selectedCheck[$index]"></td>
+                                <td scope="row">
+                                    @if (file.type === fileType) {
+                                        <i class="bi bi-file-earmark"></i>
                                     }
-                                    <span class="text-bg-primary p-2 rounded-circle ms-1">+{{file.owners.length-3}}</span>
-                                }
-                                @else {
-                                    @for (owner of file.owners; track $index) {
-                                        <img src="{{owner.avatarUrl}}" alt="{{owner.name}}" class="rounded-circle" style="width:50px;height:50px;" title="{{owner.name}}">
+                                    @else {
+                                        <i class="bi bi-folder"></i>
                                     }
-                                }
-                            </td>
-                        </tr>
+                                    @if (file.name.length > 10) {
+                                        <a title="{{file.name}}">{{file.name.slice(0,10)}}...</a>
+                                    }
+                                    @else {
+                                        <a>{{file.name}}</a>
+                                    }
+                                </td>
+                                <td scope="row">{{file.creation.toLocaleString()}}</td>
+                                <td scope="row">
+                                    @if (file.owners.length > 3) {
+                                        @for (owner of file.owners.slice(0,3); track $index) {
+                                            <img src="{{owner.avatarUrl}}" alt="{{owner.name}}" class="rounded-circle" style="width:50px;height:50px;" title="{{owner.name}}">
+                                        }
+                                        <span class="text-bg-primary p-2 rounded-circle ms-1">+{{file.owners.length-3}}</span>
+                                    }
+                                    @else {
+                                        @for (owner of file.owners; track $index) {
+                                            <img src="{{owner.avatarUrl}}" alt="{{owner.name}}" class="rounded-circle" style="width:50px;height:50px;" title="{{owner.name}}">
+                                        }
+                                    }
+                                </td>
+                            </tr>
+                        }
                     }
                 </tbody>
             </table>
