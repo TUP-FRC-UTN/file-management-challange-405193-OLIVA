@@ -39,7 +39,12 @@
                                 @else {
                                     <i class="bi bi-folder"></i>
                                 }
-                                {{file.name}}
+                                @if (file.name.length > 10) {
+                                    <a title="{{file.name}}">{{file.name.slice(0,10)}}...</a>
+                                }
+                                @else {
+                                    <a>{{file.name}}</a>
+                                }
                             </td>
                             <td>{{file.creation.toLocaleString()}}</td>
                             <td>
