@@ -1,0 +1,48 @@
+<div class="row mt-5">
+    <div class="col-6">
+        <h3>Archivos</h3>
+    </div>
+    <div class="col-6">
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Acciones
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item">Nuevo</a></li>
+                <li><a class="dropdown-item">Borrar</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <hr>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Dueños</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (file of inputFiles; track $index) {
+                        <tr>
+                            <td scope="row"><input class="form-check-input" type="checkbox" value="$index"></td>
+                            <td>{{file.name}}</td>
+                            <td>{{file.creation}}</td>
+                            <td>
+                                @for (owner of file.owners; track $index) {
+                                    <img src="{{owner.avatarUrl}}" alt="">
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
